@@ -5,11 +5,11 @@ struct process_struct {
     int pid;
     int at;   // Arrival Time
     int bt;   // Burst Time
+    int st;   // Start Time
     int ct;   // Completion Time
     int tat;  // Turnaround Time
     int wt;   // Waiting Time
     int rt;   // Response Time
-    int start_time;
 };
 
 int main() {
@@ -37,26 +37,31 @@ int main() {
     // FCFS Scheduling
     for (int i = 0; i < n; i++) {
 
+        // Calculate Start Time
         if (i == 0) {
-            ps[i].start_time = ps[i].at;
+            ps[i].st = ps[i].at;
         }
         else {
 
             if (ps[i - 1].ct < ps[i].at) {
-                ps[i].start_time = ps[i].at;
+                ps[i].st = ps[i].at;
             }
             else {
-                ps[i].start_time = ps[i - 1].ct;
+                ps[i].st = ps[i - 1].ct;
             }
         }
 
-        ps[i].ct = ps[i].start_time + ps[i].bt;
+        // Completion Time
+        ps[i].ct = ps[i].st + ps[i].bt;
 
+        // Turnaround Time
         ps[i].tat = ps[i].ct - ps[i].at;
 
+        // Waiting Time
         ps[i].wt = ps[i].tat - ps[i].bt;
 
-        ps[i].rt = ps[i].start_time - ps[i].at;
+        // Response Time
+        ps[i].rt = ps[i].st - ps[i].at;
 
         sum_tat += ps[i].tat;
         sum_wt += ps[i].wt;
@@ -67,16 +72,18 @@ int main() {
     float awt = sum_wt / n;
 
     // Throughput Calculation
-    float throughput = (float)n / (ps[n - 1].ct - ps[0].start_time);
+    float throughput =
+        (float)n / (ps[n - 1].ct - ps[0].st);
 
-    // Output
-    cout << "\nProcess\tAT\tBT\tCT\tTAT\tWT\tRT\n";
+    // Output Table
+    cout << "\nProcess\tAT\tBT\tST\tCT\tTAT\tWT\tRT\n";
 
     for (int i = 0; i < n; i++) {
 
         cout << "P" << ps[i].pid << "\t"
              << ps[i].at << "\t"
              << ps[i].bt << "\t"
+             << ps[i].st << "\t"
              << ps[i].ct << "\t"
              << ps[i].tat << "\t"
              << ps[i].wt << "\t"

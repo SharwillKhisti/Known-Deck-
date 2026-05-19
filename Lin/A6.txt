@@ -1,0 +1,165 @@
+
+# OS Assignment 6 — Loops & Arrays
+
+## Q1 Create three files
+
+
+for x in $*
+do
+touch $x
+echo "File created"
+done
+
+
+## Q2 Print date and time 10 times
+
+
+for((i=0;i<10;i++))
+do
+date
+sleep 1
+done
+
+
+## Q3 Create five directories
+
+
+for x in $*
+do
+mkdir $x
+echo "Directory $x created"
+done
+
+
+## Q4 Print long list of files passed at command line
+
+
+for x in $*
+do
+if [ -e "$x" ]
+then ls -l "$x"
+else echo "$x is not file"
+fi
+done
+
+
+## Q5 Count number of file names passed
+
+
+file=0
+for x in $*
+do
+if [ -f "$x" ]
+then file=`expr $file + 1`
+fi
+done
+echo "Total Files: $file"
+
+
+## Q6 Accept and display array
+
+
+echo "Enter array of 5 numbers: "
+for((i=0;i<5;i++))
+do
+read arr[i]
+done
+echo "Entered array: "
+for((i=0;i<5;i++))
+do
+echo ${arr[i]}
+done
+
+
+## Q7 Find even and odd numbers from array
+
+
+echo "Enter array of 5 numbers: "
+for((i=0;i<5;i++))
+do
+read arr[i]
+if [ $((arr[i] % 2)) -eq 0 ]
+then
+ echo "${arr[i]} is even"
+else echo "${arr[i]} is odd"
+fi
+done
+
+
+## Q8 Reverse a number
+
+
+echo "Enter a number: "
+read num
+reverse=0
+while [ $num -gt 0 ]
+do
+r=$((num % 10))
+reverse=$((reverse * 10 + r))
+num=$((num/10))
+done
+echo "Reverse number is $reverse"
+
+
+## Q9 Sort array ascending and descending
+
+
+echo "Enter 5 numbers:"
+for ((i=0; i<5; i++))
+do
+ read arr[i]
+done
+
+for ((i=0; i<4; i++))
+do
+ for ((j=0; j<4-i; j++))
+ do
+  if [ ${arr[j]} -gt ${arr[j+1]} ]
+  then
+   temp=${arr[j]}
+   arr[j]=${arr[j+1]}
+   arr[j+1]=$temp
+  fi
+ done
+done
+
+echo "Ascending order:"
+echo "${arr[@]}"
+
+for ((i=0; i<4; i++))
+do
+ for ((j=0; j<4-i; j++))
+ do
+  if [ ${arr[j]} -lt ${arr[j+1]} ]
+  then
+   temp=${arr[j]}
+   arr[j]=${arr[j+1]}
+   arr[j+1]=$temp
+  fi
+ done
+done
+
+echo "Descending order:"
+echo "${arr[@]}"
+
+
+## Q10 Largest and smallest number in array
+
+
+echo "Enter 5 numbers: "
+for ((i=0; i<5; i++))
+do
+read arr[i]
+done
+small=${arr[0]}
+large=${arr[0]}
+for ((i=1; i<5; i++))
+do
+if [ ${arr[i]} -lt $small ]
+then small=${arr[i]}
+fi
+if [ ${arr[i]} -gt $large ]
+then large=${arr[i]}
+fi
+done
+echo "Largest and smallest: $large and $small"

@@ -1,0 +1,188 @@
+# OS Assignment 3 — Linux Commands
+
+## Q1 Display Calendar of year 2026
+
+
+cal 2026
+
+
+## Q2 Display the system’s date
+
+
+date
+
+
+## Q3 Count number of lines in /etc/passwd
+
+
+wc -l /etc/passwd
+
+
+## Q4 Find who else is on the system
+
+
+who
+
+
+## Q5 Redirect man pages of date command to file mydate
+
+
+man date > mydate
+
+
+## Q6 Create subdirectory mydir
+
+
+mkdir mydir
+
+
+## Q7 Move mydate into mydir
+
+
+mv mydate mydir
+
+
+## Q8 Copy mydate to ourdate inside mydir
+
+
+cp mydate ourdate
+
+
+## Q9 List contents of mydir
+
+
+ls
+
+
+## Q10 Long listing of ourdate
+
+
+ls -l ourdate
+
+
+## Q11 Display current directory from root
+
+
+pwd
+
+
+## Q12 Move files from mydir back to home directory
+
+
+mv * ..
+cd ..
+
+
+## Q13 Display first 5 lines of mydate
+
+
+head -5 mydate
+
+
+## Q14 Display last 8 lines of mydate
+
+
+tail -8 mydate
+
+
+## Q15 Remove mydir
+
+
+rmdir mydir
+
+
+## Q16 Redirect long listing to file list
+
+
+ls -l > list
+
+
+## Q17 Concatenate capitals files
+
+
+cat capitals1 capitals2 capitals3 > capitals
+
+
+## Q18 Append capitals2 at end of capitals
+
+
+cat capitals2 >> capitals
+
+
+## Q19 Give read and write permissions to all users
+
+
+chmod ugo+rw capitals
+
+
+## Q20 Give read permissions only to owner
+
+
+chmod go-rw capitals
+chmod u-w capitals
+
+
+## Q21 Create alias for concatenation
+
+
+alias concatCap='cat capitals1 capitals2 capitals3 > capitals'
+concatCap
+
+
+## Q22 Count occurrences of string “the”
+
+
+grep -c the mydate
+grep -o the mydate | wc -l
+grep -oi the mydate | wc -l
+
+
+## Q23 Find line numbers where “date” exists
+
+
+grep -n date mydate
+
+
+## Q24 Print lines except those having “i”
+
+
+grep -v 'i' mydate
+grep -vi 'i' mydate
+
+
+## Q25 List 4-letter words from mydate
+
+
+grep -o '\b[a-zA-Z]\{4\}\b' mydate
+
+
+## Q26 Paste states and capitals
+
+
+paste mystates mycapitals
+
+
+## Q27 Print 1st and 3rd columns of /etc/passwd
+
+
+cut -d: -f1,3 /etc/passwd
+
+
+## Q28 Count logged in users using tee
+
+
+who | tee users | wc -l
+
+
+## Q29 Convert mystates to uppercase
+
+
+tr a-z A-Z < mystates
+
+
+## Q30 Display common values between files
+
+
+sort omKarkele.txt > f1
+sort os.txt > f2
+comm f1 f2

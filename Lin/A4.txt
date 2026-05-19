@@ -1,0 +1,126 @@
+
+# OS Assignment 4 — Shell Scripting
+
+## Q1 Execute ls, date, pwd repetitively
+
+
+ls
+date
+pwd
+
+
+## Q2 Assign variable and display with/without $
+
+
+var1=3
+var2="Om Karkele"
+echo var1
+echo $var1
+
+
+## Q3 Variables are untyped
+
+
+var1=3
+var2="Om Karkele"
+var3=4.5
+echo $var1
+echo $var2
+echo $var3
+
+
+## Q4 Accept number from keyboard
+
+
+echo "Enter a number: "
+read num1
+echo "Entered number is $num1"
+
+
+## Q5 Accept numbers from command line arguments
+
+
+echo "Total no. of args: $#"
+echo "Values: $*"
+
+
+## Q6 Display SHELL, PATH, HOME
+
+
+echo "Current shell: $SHELL"
+echo "Path: $PATH"
+echo "Home directory: $HOME"
+
+
+## Q7 Create two files
+
+
+touch $1
+touch $2
+echo "Hurray! Files created successfully."
+
+
+## Q8 Create two directories
+
+
+mkdir $1
+mkdir $2
+echo "Hurray! Directories created successfully."
+ls
+
+
+## Q9 Copy content of one file to another
+
+
+cp $1 $2
+echo "Content of $1 copied to $2"
+
+
+## Q10 Rename file
+
+
+mv $1 $2
+echo "File renamed from $1 to $2"
+
+
+## Q11 Arithmetic operations on integers
+
+
+echo "Arithmetic Operations"
+echo "Enter num1: "
+read num1
+echo "Enter num2: "
+read num2
+add=$((num1+num2))
+sub=$((num1-num2))
+mul=$((num1*num2))
+div=$(expr $num1 / $num2)
+expo=$((num1**num2))
+echo "Addition is $add"
+echo "Subtraction is $sub"
+echo "Multiplication is $mul"
+echo "Division is $div"
+echo "Exponentiation is $expo"
+
+
+## Q12 Arithmetic operations on float data
+
+
+echo "Arithmetic Operations"
+echo "Enter num1: "
+read num1
+echo "Enter num2: "
+read num2
+add=`echo $num1 + $num2 | bc`
+sub=`echo $num1 - $num2 | bc`
+mul=`echo "$num1 * $num2" | bc`
+div=`echo $num1 / $num2 | bc`
+expo=`echo $num1 ^ $num2 | bc`
+echo "Addition is $add"
+echo "Subtraction is $sub"
+echo "Multiplication is $mul"
+echo "Division is $div"
+echo "Exponentiation is $expo"
+
+
+---

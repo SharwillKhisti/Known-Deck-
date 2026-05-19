@@ -1,14 +1,14 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int main() {
-    // 1) Define Data
-    size_t np, nf;
+
+    // Variables
+    int np, nf;
     int LA, PA;
     int pagenum, offset, framenum, pagesize;
 
-    // 2) Input
+    // Input
     cout << "Enter number of pages (np): ";
     cin >> np;
 
@@ -18,56 +18,73 @@ int main() {
     cout << "Enter page size: ";
     cin >> pagesize;
 
-    vector<int> PageTable(np);
+    // Page Table Array
+    int PageTable[100];
 
     cout << "\n--- Enter Page Table entries ---\n";
 
-    for (size_t i = 0; i < np; i++) {
-        cout << "Enter frame number for Page " << i << ": ";
+    for (int i = 0; i < np; i++) {
+
+        cout << "Enter frame number for Page "
+             << i << ": ";
+
         cin >> PageTable[i];
 
         // Validation
-        if (PageTable[i] >= static_cast<int>(nf) || PageTable[i] < 0) {
-            cout << "[!] Warning: Frame " << PageTable[i]
-                 << " is out of bounds (should be 0 to "
-                 << (nf - 1) << ").\n";
+        if (PageTable[i] >= nf || PageTable[i] < 0) {
+
+            cout << "[!] Warning: Frame "
+                 << PageTable[i]
+                 << " is out of bounds (0 to "
+                 << nf - 1 << ")\n";
         }
     }
 
+    // Input Logical Address
     cout << "\nEnter Logical Address (LA): ";
     cin >> LA;
 
-    // 3) Address Translation
-
-    // a) Page Number
+    // Step 1: Find Page Number
     pagenum = LA / pagesize;
 
-    // b) Offset
+    // Step 2: Find Offset
     offset = LA % pagesize;
 
-    // Boundary check
-    if (pagenum >= static_cast<int>(np) || pagenum < 0) {
-        cout << "\nError: Logical address " << LA
-             << " results in Page Number " << pagenum
-             << ", which is outside the page table limit (0 to "
-             << (np - 1) << ").\n";
+    // Boundary Check
+    if (pagenum >= np || pagenum < 0) {
+
+        cout << "\nError: Invalid Page Number "
+             << pagenum << endl;
+
         return 1;
     }
 
-    // c) Frame Number
-    framenum = PageTable[static_cast<size_t>(pagenum)];
+    // Step 3: Find Frame Number
+    framenum = PageTable[pagenum];
 
-    // d) Physical Address
+    // Step 4: Find Physical Address
     PA = (framenum * pagesize) + offset;
 
-    // 4) Output
+    // Output
     cout << "\n--- Address Translation Result ---\n";
-    cout << "Logical Address (LA) : " << LA << endl;
-    cout << "Page Size            : " << pagesize << endl;
-    cout << "Page Number          : " << pagenum << endl;
-    cout << "Offset               : " << offset << endl;
-    cout << "Frame Number         : " << framenum << endl;
-    cout << "Physical Address (PA): " << PA << endl;
+
+    cout << "Logical Address (LA) : "
+         << LA << endl;
+
+    cout << "Page Size            : "
+         << pagesize << endl;
+
+    cout << "Page Number          : "
+         << pagenum << endl;
+
+    cout << "Offset               : "
+         << offset << endl;
+
+    cout << "Frame Number         : "
+         << framenum << endl;
+
+    cout << "Physical Address(PA) : "
+         << PA << endl;
 
     return 0;
 }

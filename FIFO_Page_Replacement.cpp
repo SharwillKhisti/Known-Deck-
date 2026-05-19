@@ -1,93 +1,87 @@
-#include <stdio.h>
+#include <iostream>
+using namespace std;
 
 int main()
 {
     int nf, np;
+
     int hit = 0, fault = 0;
-    int i, j, flag;
+
     int pos = 0;
 
-    printf("Enter number of frames (nf): ");
-    scanf("%d", &nf);
+    cout << "Enter number of frames: ";
+    cin >> nf;
 
-    printf("Enter number of pages in reference string (np): ");
-    scanf("%d", &np);
+    cout << "Enter number of pages: ";
+    cin >> np;
 
-    int F[nf];
-    int p[np];
+    int F[100];
+    int p[100];
 
-    printf("Enter the page reference string (space separated): ");
+    cout << "Enter page reference string: ";
 
-    for (i = 0; i < np; i++)
+    for (int i = 0; i < np; i++)
     {
-        scanf("%d", &p[i]);
+        cin >> p[i];
     }
 
-    for (i = 0; i < nf; i++)
+    // Initialize frames
+    for (int i = 0; i < nf; i++)
     {
         F[i] = -1;
     }
 
-    printf("\nPage\t| Frame Status\t\t| Condition\n");
+    cout << "\nFIFO Page Replacement\n";
 
-    for (i = 0; i < np; i++)
+    for (int i = 0; i < np; i++)
     {
-        flag = 0;
+        int flag = 0;
 
-        for (j = 0; j < nf; j++)
+        // Check Hit
+        for (int j = 0; j < nf; j++)
         {
             if (F[j] == p[i])
             {
                 hit++;
+
                 flag = 1;
+
                 break;
             }
         }
 
+        // Only print when fault occurs
         if (flag == 0)
         {
             F[pos] = p[i];
+
             pos++;
+
             fault++;
 
             if (pos == nf)
             {
                 pos = 0;
             }
-        }
 
-        printf("%d\t| ", p[i]);
+            cout << "Page Fault for "
+                 << p[i] << " -> ";
 
-        for (j = 0; j < nf; j++)
-        {
-            if (F[j] == -1)
+            // Print Frame Status
+            for (int j = 0; j < nf; j++)
             {
-                printf("-1 ");
+                cout << F[j] << " ";
             }
-            else
-            {
-                printf("%d ", F[j]);
-            }
-        }
 
-        if (flag == 1)
-        {
-            printf("\t\t| H\n");
-        }
-        else
-        {
-            printf("\t\t| F\n");
+            cout << endl;
         }
     }
 
-    float hit_ratio = (float)hit / np;
-    float miss_ratio = (float)fault / np;
+    cout << "\nTotal Hits: "
+         << hit << endl;
 
-    printf("-------------------------------------------------\n");
-    printf("Total Hits: %d\n", hit);
-    printf("Total Faults: %d\n", fault);
-    printf("Hit Ratio: %.2f\n", hit_ratio);
-    printf("Miss Ratio: %.2f\n", miss_ratio);
+    cout << "Total Faults: "
+         << fault << endl;
 
     return 0;
 }

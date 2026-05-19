@@ -1,0 +1,110 @@
+
+# OS Assignment 5 — Conditional Shell Scripts
+
+## Q1 Check number greater than 10
+
+
+echo "Enter a number: "
+read num
+if [ $num -gt 10 ]
+then echo "$num is greater than 10"
+else echo "$num is not greater than 10"
+fi
+
+
+## Q2 Check if file exists, else create
+
+
+echo "Enter file name: "
+read ch
+if [ -e $ch ]
+then echo "File exists"
+else touch $ch
+echo "File $ch is created"
+fi
+
+
+## Q3 Check directory or create new
+
+
+if [ -d $1 ]
+then echo "Directory $1 exists"
+else mkdir $2
+echo "$2 directory created"
+fi
+
+
+## Q4 Check total arguments
+
+
+if [ $# -gt 5 ]
+then echo "Too many arguments"
+else echo "$# arguments passed"
+fi
+
+
+## Q5 Check file or directory
+
+
+if [ -f $1 ]
+then echo "$1 is a regular file"
+elif [ -d $1 ]
+then echo "$1 is a directory"
+else echo "$1 is not a file nor a directory"
+fi
+
+
+## Q6 Check month is Feb or March
+
+
+echo "Enter a month: "
+read month
+if [ $month = "Feb" ] || [ $month = "March" ]
+then echo "Yes, feb or march"
+else echo "Not feb or march"
+fi
+
+
+## Q7 Check whether file or directory exists
+
+
+echo "Enter file or directory"
+read name
+if [ -e $name ] && [ -f $name ]
+then echo "$name file exists"
+elif [ -e $name ] && [ -d $name ]
+then echo "$name directory exists"
+else echo "Nor a directory nor a file"
+fi
+
+
+## Q8 Check file exists and readable
+
+
+echo "Enter file name"
+read f
+if [ -e $f ] && [ -r $f ]
+then echo "Yes $f exists and it is readable"
+else echo "No"
+fi
+
+
+## Q9 Check present month is Feb
+
+
+if [ $(date +"%m") -eq "02" ]
+then echo "Feb"
+else echo "Not feb"
+fi
+
+
+## Q10 Check current user is root or regular
+
+
+if [ "$(whoami)" = "root" ]
+then echo "Current user is root"
+else echo "Current user is regular user"
+fi
+
+
+---
